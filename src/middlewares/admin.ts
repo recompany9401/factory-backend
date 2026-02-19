@@ -1,12 +1,12 @@
 import { Response, NextFunction } from "express";
-import { AuthedRequest } from "./auth";
+import { AuthRequest } from "./auth";
 
 export function requireAdmin(
-  req: AuthedRequest,
+  req: AuthRequest,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
-  if (req.auth?.role !== "ADMIN") {
+  if (req.user?.role !== "ADMIN") {
     return res.status(403).json({ message: "Admin only" });
   }
   return next();
